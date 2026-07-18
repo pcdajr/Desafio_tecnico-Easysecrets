@@ -17,3 +17,4 @@
 //getByRole('textbox', { name: 'Credit card:' });
 //getByRole('textbox', { name: 'Month:' });
 //getByRole('textbox', { name: 'Year:' });
+//getByRole('button', { name: 'Purchase' });
