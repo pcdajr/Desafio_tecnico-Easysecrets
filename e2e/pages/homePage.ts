@@ -10,7 +10,6 @@ export default class HomePage {
      async visitar () {
         await this.page.goto('/');
 
-        
     }       
 
 
