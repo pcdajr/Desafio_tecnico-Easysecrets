@@ -13,10 +13,12 @@ export default class CarrinhoPage {
 		await this.page.getByRole('link', { name: 'Cart' }).click();
 	}
 
+	// Retorna quantos links de exclusão existem no carrinho
 	async contarItens(): Promise<number> {
 		return await this.elems.locatorExcluirLista().count();
 	}
 
+	// Espera o carrinho atualizar após remover um item
 	private async esperarReducaoDaContagem(contagemAnterior: number, localizadorExcluir: Locator, timeout = 3000) {
 		const start = Date.now();
 		while (Date.now() - start < timeout) {
@@ -26,6 +28,7 @@ export default class CarrinhoPage {
 		}
 	}
 
+	// Remove um produto do carrinho pelo índice do link 'Delete'
 	async removerProdutoPorIndice(index: number): Promise<void> {
 		const localizadorExcluir = this.elems.locatorExcluirLista();
 		const count = await localizadorExcluir.count();
@@ -42,6 +45,7 @@ export default class CarrinhoPage {
 		await this.esperarReducaoDaContagem(count, localizadorExcluir);
 	}
 
+	// Verifica se o carrinho tem a quantidade esperada de itens
 	async validarQuantidadeDeItensEsperada(esperado: number): Promise<void> {
 		const count = await this.elems.locatorExcluirLista().count();
 		if (count !== esperado) throw new Error(`Esperado ${esperado} itens, encontrado ${count}`);

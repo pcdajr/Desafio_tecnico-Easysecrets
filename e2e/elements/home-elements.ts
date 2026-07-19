@@ -19,7 +19,7 @@ export class HomeElements{
     locatorLinkCadastrar = () =>
         this.page.getByRole('link',{name:'Sign up'});
 
-    // Elementos do CARROSEL DE PRODUTOS
+    // Elementos do CARROSSEL DE PRODUTOS
 
     locatorBotaoProximo = () =>
         this.page.getByRole('button', { name: 'Next' });
@@ -27,6 +27,9 @@ export class HomeElements{
     locatorBotaoAnterior = () =>
         this.page.getByRole('button', { name: 'Previous' });
 
+
+
+    // Elementos do MENU DE CATEGORIAS
     locatorLinkPhones = () =>
         this.page.getByRole('link',{name:'Phones'});
 
