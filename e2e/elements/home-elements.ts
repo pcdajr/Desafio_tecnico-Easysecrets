@@ -40,7 +40,7 @@ export class HomeElements{
     
     // Elementos do MODAL - CADASTRO
 
-    locatorModalTextBoxNome = () =>
+    locatorModalTextBoxNomeCadastro = () =>
         this.page.getByRole('textbox', { name: 'Username:' });
 
     locatorModalTextBoxSenha = () =>

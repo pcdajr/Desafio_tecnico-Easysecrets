@@ -1,12 +1,17 @@
 import { Page } from "@playwright/test";
 
-export class ProdutoElements{
+export class ProdutoElements {
+    constructor(private page: Page) {}
 
-    constructor(private page: Page){}
+    locatorLinkCategoria = (categoria: 'Phones' | 'Laptops' | 'Monitors') =>
+        this.page.getByRole('link', { name: categoria });
 
-    // Elemento do botão "Add to cart" (dentro da página de produtos)
+    locatorLinkProduto = (nome: string) =>
+        this.page.getByRole('link', { name: nome });
 
     locatorLinkAdicionarAoCarrinho = () =>
-        this.page.getByRole('link',{name:'Add to cart'});
+        this.page.getByRole('link', { name: 'Add to cart' });
 
+    locatorBotoesAdicionarAoCarrinho = () =>
+        this.page.locator('a', { hasText: 'Add to cart' });
 }
