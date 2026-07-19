@@ -7,59 +7,59 @@ export class HomeElements{
 
     // Elementos do MENU PRINCIPAL
 
-    home = () =>
+    locatorLinkHome = () =>
         this.page.getByRole('link',{name:'Home'});
 
-    cart = () =>
+    locatorLinkCarrinho = () =>
         this.page.getByRole('link',{name:'Cart'});
 
-    login = () =>
+    locatorLinkLogin = () =>
         this.page.getByRole('link',{name:'Log in'});
 
-    signup = () =>
+    locatorLinkCadastrar = () =>
         this.page.getByRole('link',{name:'Sign up'});
 
     // Elementos do CARROSEL DE PRODUTOS
 
-    nextButton = () =>
+    locatorBotaoProximo = () =>
         this.page.getByRole('button', { name: 'Next' });
 
-    previousButton = () =>
+    locatorBotaoAnterior = () =>
         this.page.getByRole('button', { name: 'Previous' });
 
-    phones = () =>
+    locatorLinkPhones = () =>
         this.page.getByRole('link',{name:'Phones'});
 
-    laptops = () =>
+    locatorLinkLaptops = () =>
         this.page.getByRole('link',{name:'Laptops'});
 
-    monitors = () =>
+    locatorLinkMonitors = () =>
         this.page.getByRole('link',{name:'Monitors'});
 
     
     
     // Elementos do MODAL - CADASTRO
 
-    getUsernameInput = () =>
+    locatorModalTextBoxNome = () =>
         this.page.getByRole('textbox', { name: 'Username:' });
 
-    getPasswordInput = () =>
+    locatorModalTextBoxSenha = () =>
         this.page.getByRole('textbox', { name: 'Password:' });
 
-    getSignupButton = () =>
+    locatorModalBotaoCadastrar = () =>
         this.page.getByRole('button', { name: 'Sign up' }); 
 
 
 
     // Elementos do MODAL - LOGIN
 
-    getLoginUsernameInput = () =>
+    locatorModalLoginInputNome = () =>
         this.page.locator('#loginusername');
 
-    getLoginPasswordInput = () =>
+    locatorModalLoginInputSenha = () =>
         this.page.locator('#loginpassword');
 
-    getLoginButton = () =>
+    locatorModalBotaoLogin = () =>
         this.page.getByRole('button', { name: 'Log in' });
 
     

@@ -6,7 +6,7 @@ export class ProdutoElements{
 
     // Elemento do botão "Add to cart" (dentro da página de produtos)
 
-    addToCart = () =>
+    locatorLinkAdicionarAoCarrinho = () =>
         this.page.getByRole('link',{name:'Add to cart'});
 
 }
