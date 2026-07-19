@@ -1,5 +1,6 @@
 import { Page } from '@playwright/test';
 import { HomeElements } from '../elements/home-elements';
+import { Usuarios } from '../data/usuarios';
 
 export default class HomePage {
   private elementos: HomeElements;
