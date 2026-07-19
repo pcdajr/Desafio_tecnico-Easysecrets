@@ -5,6 +5,7 @@ export type UsuarioData = {
 };
 
 export class Usuarios {
+
     static readonly usuarioValido: UsuarioData = {
         username: 'pauloandrade',
         password: 'Qaz@123',
@@ -29,15 +30,15 @@ export class Usuarios {
         description: 'Senha inválida para testes de login',
     };
 
-    static get(type: 'valid' | 'existing' | 'emptyFields' | 'wrongPassword'): UsuarioData {
+    static get(type: 'usuarioValido' | 'usuarioDuplicado' | 'usuarioVazio' | 'usuarioSenhaErrada'): UsuarioData {
         switch (type) {
-            case 'valid':
+            case 'usuarioValido':
                 return Usuarios.usuarioValido;
-            case 'existing':
+            case 'usuarioDuplicado':
                 return Usuarios.usuarioDuplicado;
-            case 'emptyFields':
+            case 'usuarioVazio':
                 return Usuarios.usuarioVazio;
-            case 'wrongPassword':
+            case 'usuarioSenhaErrada':
                 return Usuarios.usuarioSenhaErrada;
             default:
                 throw new Error(`Tipo de usuário não suportado: ${type}`);

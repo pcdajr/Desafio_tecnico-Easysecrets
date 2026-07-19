@@ -1,12 +1,26 @@
-// Fechar pedido (dentro do carrinho)
-    await page.getByRole('button', { name: 'Place Order' });
+import { Page, Locator } from "@playwright/test";
 
-// remover produto único (dentro do carrinho)
-     getByRole('link', { name: 'Delete' });
+export class CarrinhoElements {
+  constructor(private page: Page) {}
 
+  // Botão para finalizar pedido (Place Order)
+  fecharPedido = () =>
+    this.page.getByRole('button', { name: 'Place Order' });
 
-// remover produto múltiplos (dentro do carrinho)
+  // link/botão 'Delete' na lista (quando existe um único produto)
+  deleteUnico = () =>
+    this.page.getByRole('link', { name: 'Delete' }).first();
+  
+  // Todos os links 'Delete' na tabela
+  deleteLista = () => this.page.getByRole('link', { name: 'Delete' });
 
-//getByRole('link', { name: 'Delete' }).first();
-//getByRole('link', { name: 'Delete' }).nth(1)
-//getByRole('link', { name: 'Delete' }).nth(2)
+  // Fallback: localizar o link 'Delete' dentro de uma linha de tabela
+  // rowNumber é a linha no DOM (1 = primeira linha de dados)
+  deletePorLinha = (rowNumber: number): Locator =>
+    this.page.locator(`tr:nth-child(${rowNumber}) > td:nth-child(4) > a`);
+
+  // Localizar delete pelo nome do produto (mais robusto)
+  deletePorNomeProduto = (productName: string): Locator =>
+    this.page.locator('tr', { hasText: productName }).getByRole('link', { name: 'Delete' });
+}
+  
