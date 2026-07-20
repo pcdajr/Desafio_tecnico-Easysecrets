@@ -23,7 +23,6 @@ test('CT01 - criação de cadastro válido', async ({ page }) => {
   await alerta.accept();
 });
 
-
 test('CT03 - cadastro com usuário já existente', async ({ page }) => {
   const homePage = new HomePage(page);
   const usuarioDuplicado = Usuarios.usuarioDuplicado;
