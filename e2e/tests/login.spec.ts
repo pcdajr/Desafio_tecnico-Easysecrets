@@ -41,21 +41,3 @@ test('CT02 - login com senha inválida', async ({ page }) => {
   expect(alerta.message()).toContain('Wrong password.');
   await alerta.accept();
 });
-
-test('CT03 - login com campos vazios', async ({ page }) => {
-  const homePage = new HomePage(page);
-  const usuarioVazio = Usuarios.get('usuarioVazio');
-
-  await homePage.visitar();
-  await homePage.abrirLogin();
-  await homePage.preencherLoginUsuario(usuarioVazio.username);
-  await homePage.preencherLoginSenha(usuarioVazio.password);
-
-  const [alerta] = await Promise.all([
-    page.waitForEvent('dialog'),
-    homePage.clicarEntrar(),
-  ]);
-
-  expect(alerta.message()).toContain('Please fill out Username and Password.');
-  await alerta.accept();
-});

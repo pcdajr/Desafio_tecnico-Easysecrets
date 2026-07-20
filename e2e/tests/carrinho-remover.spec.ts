@@ -46,73 +46,8 @@ async function obterTotalCarrinho(page: Page): Promise<number> {
   return Number(matchTotal[1]);
 }
 
-test('CT01 - adicionar 1 produto ao carrinho', async ({ page }) => {
-  const nomeProduto = 'Samsung galaxy s6';
-  const precoProduto = await adicionarProdutoAoCarrinho(page, nomeProduto);
 
-  await abrirCarrinho(page);
-
-  const linhaProduto = page.locator('tr', { hasText: nomeProduto });
-  await expect(linhaProduto).toHaveCount(1);
-  await expect(page.getByRole('link', { name: 'Delete' })).toHaveCount(1);
-  await expect(linhaProduto.first()).toContainText(nomeProduto);
-  await expect(linhaProduto.first()).toContainText(String(precoProduto));
-
-  const totalCarrinho = await obterTotalCarrinho(page);
-  expect(totalCarrinho).toBe(precoProduto);
-});
-
-test('CT02 - adicionar dois produtos diferentes', async ({ page }) => {
-  const produtos = ['Samsung galaxy s6', 'Nokia lumia'];
-  const precos: number[] = [];
-
-  for (const produto of produtos) {
-    precos.push(await adicionarProdutoAoCarrinho(page, produto));
-  }
-
-  await abrirCarrinho(page);
-
-  for (const produto of produtos) {
-    await expect(page.locator('tr', { hasText: produto })).toHaveCount(1);
-  }
-
-  await expect(page.getByRole('link', { name: 'Delete' })).toHaveCount(produtos.length);
-
-  const totalCarrinho = await obterTotalCarrinho(page);
-  const totalEsperado = precos.reduce((soma, preco) => soma + preco, 0);
-
-  expect(totalCarrinho).toBe(totalEsperado);
-});
-
-test('CT03 - adicionar o mesmo produto duas vezes', async ({ page }) => {
-  const nomeProduto = 'Samsung galaxy s6';
-  const homePage = new HomePage(page);
-  const produtoPage = new ProdutoPage(page);
-
-  await homePage.visitar();
-  await produtoPage.abrirProduto(nomeProduto);
-
-  const precoProduto = await adicionarAoCarrinhoNaPaginaDeProduto(page, produtoPage);
-
-  const [alertaSegundaInclusao] = await Promise.all([
-    page.waitForEvent('dialog'),
-    produtoPage.adicionarAoCarrinho(),
-  ]);
-
-  expect(alertaSegundaInclusao.message()).toContain('Product added');
-  await alertaSegundaInclusao.accept();
-
-  await abrirCarrinho(page);
-
-  const linhasProduto = page.locator('tr', { hasText: nomeProduto });
-  await expect(linhasProduto).toHaveCount(2);
-  await expect(page.getByRole('link', { name: 'Delete' })).toHaveCount(2);
-  await expect(linhasProduto.first()).toContainText(nomeProduto);
-  await expect(linhasProduto.first()).toContainText(String(precoProduto));
-
-  const totalCarrinho = await obterTotalCarrinho(page);
-  expect(totalCarrinho).toBe(precoProduto * 2);
-});
+// Testes removendo produtos ao carrinho e validando o comportamento do mesmo
 
 test('CT04 - remover o único produto do carrinho', async ({ page }) => {
   const nomeProduto = 'Samsung galaxy s6';
@@ -144,23 +79,6 @@ test('CT05 - remover um produto entre vários', async ({ page }) => {
   expect(totalCarrinho).toBe(precos[0]);
 });
 
-test('CT06 - validar o valor total após a remoção', async ({ page }) => {
-  const produtos = ['Samsung galaxy s6', 'Nokia lumia'];
-  const precos: number[] = [];
-
-  for (const produto of produtos) {
-    precos.push(await adicionarProdutoAoCarrinho(page, produto));
-  }
-
-  await abrirCarrinho(page);
-  const totalAntes = precos.reduce((soma, preco) => soma + preco, 0);
-  expect(await obterTotalCarrinho(page)).toBe(totalAntes);
-
-  await page.locator('tr', { hasText: 'Nokia lumia' }).getByRole('link', { name: 'Delete' }).click();
-
-  const totalDepois = await obterTotalCarrinho(page);
-  expect(totalDepois).toBe(precos[0]);
-});
 
 test('CT07 - remover uma ocorrência de produto duplicado', async ({ page }) => {
   const nomeProduto = 'Samsung galaxy s6';

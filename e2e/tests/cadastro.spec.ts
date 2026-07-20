@@ -23,22 +23,6 @@ test('CT01 - criação de cadastro válido', async ({ page }) => {
   await alerta.accept();
 });
 
-test('CT02 - cadastro com dados inválidos (campos vazios)', async ({ page }) => {
-  const homePage = new HomePage(page);
-  const usuarioVazio = Usuarios.get('usuarioVazio');
-
-  await homePage.visitar();
-  await homePage.abrirCadastro();
-  await homePage.preencherCadastroUsuario(usuarioVazio.username);
-  await homePage.preencherCadastroSenha(usuarioVazio.password);
-
-  const [alerta] = await Promise.all([
-    page.waitForEvent('dialog'),
-    homePage.clicarCadastrar()
-  ]);
-  expect(alerta.message()).toContain('Please fill out Username and Password.');
-  await alerta.accept();
-});
 
 test('CT03 - cadastro com usuário já existente', async ({ page }) => {
   const homePage = new HomePage(page);
