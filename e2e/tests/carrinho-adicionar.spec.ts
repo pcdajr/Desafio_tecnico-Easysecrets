@@ -6,7 +6,7 @@ import CarrinhoPage from '../pages/carrinhoPage';
 
 // Testes adicionando produtos ao carrinho e validando o comportamento do mesmo
 
-test('CT01 - adicionar 1 produto ao carrinho', async ({ page }) => {
+test('CT08 - adicionar 1 produto ao carrinho', async ({ page }) => {
 
   const carrinhoPage = new CarrinhoPage(page);
   const nomeProduto = 'Samsung galaxy s6';
@@ -24,7 +24,7 @@ test('CT01 - adicionar 1 produto ao carrinho', async ({ page }) => {
   expect(totalCarrinho).toBe(precoProduto);
 });
 
-test('CT02 - adicionar dois produtos diferentes', async ({ page }) => {
+test('CT09 - adicionar dois produtos diferentes', async ({ page }) => {
   const produtos = ['Samsung galaxy s6', 'Nokia lumia'];
   const precos: number[] = [];
   const carrinhoPage = new CarrinhoPage(page);
@@ -47,7 +47,7 @@ test('CT02 - adicionar dois produtos diferentes', async ({ page }) => {
   expect(totalCarrinho).toBe(totalEsperado);
 });
 
-test('CT03 - adicionar o mesmo produto duas vezes', async ({ page }) => {
+test('CT10 - adicionar o mesmo produto duas vezes', async ({ page }) => {
   const nomeProduto = 'Samsung galaxy s6';
   const homePage = new HomePage(page);
   const produtoPage = new ProdutoPage(page);
