@@ -15,10 +15,44 @@ test('CT01 - criação de cadastro válido', async ({ page }) => {
   await homePage.preencherCadastroUsuario(usuario.username);
   await homePage.preencherCadastroSenha(usuario.password);
 
-  const dialog = page.waitForEvent('dialog');
-  await homePage.clicarCadastrar();
-
-  const alerta = await dialog;
+  const [alerta] = await Promise.all([
+    page.waitForEvent('dialog'),
+    homePage.clicarCadastrar()
+  ]);
   expect(alerta.message()).toContain('Sign up successful');
+  await alerta.accept();
+});
+
+test('CT02 - cadastro com dados inválidos (campos vazios)', async ({ page }) => {
+  const homePage = new HomePage(page);
+  const usuarioVazio = Usuarios.get('usuarioVazio');
+
+  await homePage.visitar();
+  await homePage.abrirCadastro();
+  await homePage.preencherCadastroUsuario(usuarioVazio.username);
+  await homePage.preencherCadastroSenha(usuarioVazio.password);
+
+  const [alerta] = await Promise.all([
+    page.waitForEvent('dialog'),
+    homePage.clicarCadastrar()
+  ]);
+  expect(alerta.message()).toContain('Please fill out Username and Password.');
+  await alerta.accept();
+});
+
+test('CT03 - cadastro com usuário já existente', async ({ page }) => {
+  const homePage = new HomePage(page);
+  const usuarioDuplicado = Usuarios.get('usuarioDuplicado');
+
+  await homePage.visitar();
+  await homePage.abrirCadastro();
+  await homePage.preencherCadastroUsuario(usuarioDuplicado.username);
+  await homePage.preencherCadastroSenha(usuarioDuplicado.password);
+
+  const [alerta] = await Promise.all([
+    page.waitForEvent('dialog'),
+    homePage.clicarCadastrar()
+  ]);
+  expect(alerta.message()).toContain('This user already exist');
   await alerta.accept();
 });

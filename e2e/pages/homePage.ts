@@ -62,7 +62,7 @@ export default class HomePage {
   }
 
   async clicarCadastrar() {
-    await this.elementos.locatorModalBotaoCadastrar().click();
+    await this.elementos.locatorModalBotaoCadastrar().click({ timeout: 5000 });
   }
 
   // Preenche o nome de usuário no modal de login
