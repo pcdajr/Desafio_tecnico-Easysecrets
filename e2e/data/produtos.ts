@@ -35,11 +35,5 @@ export class Produtos {
         monitors: Produtos.monitors,
     };
 
-    static findByName(name: string): ProdutoData | undefined {
-        return Produtos.all.find((produto) => produto.name === name);
-    }
-
-    static getByCategory(category: ProdutoData['category']): ProdutoData[] {
-        return Produtos.categories[category] || [];
-    }
+   
 }
