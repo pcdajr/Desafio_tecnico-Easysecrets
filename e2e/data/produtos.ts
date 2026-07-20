@@ -27,13 +27,7 @@ export class Produtos {
         { category: 'monitors', name: 'ASUS Full HD' },
     ];
 
+    //concatenando todos os produtos das categorias em uma unica lista
     static readonly all: ProdutoData[] = [...Produtos.phones, ...Produtos.laptops, ...Produtos.monitors];
-
-    static readonly categories: Record<ProdutoData['category'], ProdutoData[]> = {
-        phones: Produtos.phones,
-        laptops: Produtos.laptops,
-        monitors: Produtos.monitors,
-    };
-
    
 }

@@ -30,19 +30,4 @@ export class Usuarios {
         password: 'error',
         description: 'Senha inválida para testes de login',
     };
-
-    static get(type: 'usuarioValido' | 'usuarioDuplicado' | 'usuarioVazio' | 'usuarioSenhaErrada'): UsuarioData {
-        switch (type) {
-            case 'usuarioValido':
-                return Usuarios.usuarioValido;
-            case 'usuarioDuplicado':
-                return Usuarios.usuarioDuplicado;
-            case 'usuarioVazio':
-                return Usuarios.usuarioVazio;
-            case 'usuarioSenhaErrada':
-                return Usuarios.usuarioSenhaErrada;
-            default:
-                throw new Error(`Tipo de usuário não suportado: ${type}`);
-        }
-    }
 }

@@ -4,7 +4,7 @@ import HomePage from '../pages/homePage';
 
 test('CT01 - criação de cadastro válido', async ({ page }) => {
   const homePage = new HomePage(page);
-  const usuarioBase = Usuarios.get('usuarioValido');
+  const usuarioBase = Usuarios.usuarioValido;
   const usuario = {
     ...usuarioBase,
     username: `${usuarioBase.username}_${Date.now()}`,
@@ -26,7 +26,7 @@ test('CT01 - criação de cadastro válido', async ({ page }) => {
 
 test('CT03 - cadastro com usuário já existente', async ({ page }) => {
   const homePage = new HomePage(page);
-  const usuarioDuplicado = Usuarios.get('usuarioDuplicado');
+  const usuarioDuplicado = Usuarios.usuarioDuplicado;
 
   await homePage.visitar();
   await homePage.abrirCadastro();

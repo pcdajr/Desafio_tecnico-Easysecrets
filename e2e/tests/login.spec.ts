@@ -4,7 +4,7 @@ import HomePage from '../pages/homePage';
 
 test('CT01 - login com senha inválida em várias tentativas', async ({ page }) => {
   const homePage = new HomePage(page);
-  const usuarioSenhaErrada = Usuarios.get('usuarioSenhaErrada');
+  const usuarioSenhaErrada = Usuarios.usuarioSenhaErrada;
 
   await homePage.visitar();
   await homePage.abrirLogin();
@@ -26,7 +26,7 @@ test('CT01 - login com senha inválida em várias tentativas', async ({ page }) 
 
 test('CT02 - login com senha inválida', async ({ page }) => {
   const homePage = new HomePage(page);
-  const usuarioSenhaErrada = Usuarios.get('usuarioSenhaErrada');
+  const usuarioSenhaErrada = Usuarios.usuarioSenhaErrada;
 
   await homePage.visitar();
   await homePage.abrirLogin();
